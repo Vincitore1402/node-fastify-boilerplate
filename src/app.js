@@ -1,11 +1,11 @@
 const fastify = require('fastify');
 
 const app = fastify({
-  logger: true
+  logger: true,
 });
 
 app.get('/', (request, response) => {
-  response.send({ data: 'Hi from Fastify' })
+  response.send({ data: 'Hi from Fastify' });
 });
 
 module.exports = app;
