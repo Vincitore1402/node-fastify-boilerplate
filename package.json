@@ -1,0 +1,31 @@
+{
+  "name": "universities-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vincitore1402/universities-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vincitore1402/universities-service/issues"
+  },
+  "homepage": "https://github.com/Vincitore1402/universities-service#readme",
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "dependencies": {
+    "fastify": "^3.14.1",
+    "lodash": "^4.17.21",
+    "luxon": "^1.26.0",
+    "pino": "^6.11.2"
+  }
+}
