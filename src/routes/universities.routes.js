@@ -1,12 +1,11 @@
 const SERVICE_NAME = '/universities';
 
-const find = async (req, res) => {
-  return [];
-};
+const getAuth = (app) => [app.verifyBearerAuth];
+
+const find = async (req, res) => [];
 
 module.exports = async (app) => {
-  app.get(
-    SERVICE_NAME,
-    find
-  );
+  app.get(SERVICE_NAME, {
+    preHandler: [...getAuth(app)],
+  }, find);
 };

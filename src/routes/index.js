@@ -1,13 +1,13 @@
 const universitiesRoutes = require('./universities.routes');
 
 const routes = [
-  universitiesRoutes
+  universitiesRoutes,
 ];
 
 module.exports = async (app) => {
   await Promise.all([
     ...routes.map(
-      it => app.register(it)
-    )
+      (it) => app.register(it),
+    ),
   ]);
 };
