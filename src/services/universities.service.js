@@ -3,6 +3,8 @@ const {
   omitBy, merge, isNil,
 } = require('lodash/fp');
 
+const { ClientError } = require('../utils/errors');
+
 const sanitizeResponse = omit(['__v']);
 
 class UniversitiesService {
@@ -28,7 +30,7 @@ class UniversitiesService {
       .findOne({ _id: id })
       .lean();
 
-    if (!data) throw new Error(`University with id: ${id} not found`);
+    if (!data) throw new ClientError(`University with id: ${id} not found`);
 
     return sanitizeResponse(data);
   }
@@ -56,7 +58,7 @@ class UniversitiesService {
    * @param payload
    */
   async update(id, payload = {}) {
-    const item = this.get(id);
+    const item = await this.get(id);
 
     const updatePayload = pipe(
       omitBy(isNil),
