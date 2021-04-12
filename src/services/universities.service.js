@@ -83,7 +83,9 @@ class UniversitiesService {
    * @param id
    */
   async remove(id) {
-    await this.Model.findByIdAndRemove(id);
+    const resp = await this.Model.findByIdAndRemove(id);
+
+    if (!resp) throw new ClientError(`University with id: ${id} not found`);
 
     return { id };
   }
