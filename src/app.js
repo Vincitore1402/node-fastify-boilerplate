@@ -3,6 +3,7 @@ const bearerAuthPlugin = require('fastify-bearer-auth');
 
 const registerRoutes = require('./routes');
 const { connect: connectDB } = require('./db');
+const { errorHandler } = require('./middlewares');
 const config = require('./config');
 
 connectDB();
@@ -16,11 +17,9 @@ app.register(bearerAuthPlugin, {
   keys: [config.auth.bearer_token],
 });
 
-app.get('/', (request, response) => {
-  response.send({ data: 'Hi from Fastify' });
-});
-
 registerRoutes(app);
+
+app.setErrorHandler(errorHandler);
 
 app
   .listen(config.port);
