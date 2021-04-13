@@ -1,13 +1,16 @@
 const { createUniversitiesService } = require('../services');
 const { University } = require('../db');
 const { success } = require('../utils/reply.utils');
+const { parseQuery } = require('../utils/query.utils');
 
 const universitiesService = createUniversitiesService({
   model: University,
 });
 
 const find = async (request, reply) => {
-  const data = await universitiesService.list();
+  const { query } = parseQuery(request.query);
+
+  const data = await universitiesService.list(query);
 
   return success(reply, data);
 };

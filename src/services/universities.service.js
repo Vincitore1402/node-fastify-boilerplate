@@ -12,9 +12,14 @@ class UniversitiesService {
     this.Model = options.model || {};
   }
 
-  async list() {
+  /**
+   * Returns a list of universities which match the provided query
+   *
+   * @param query
+   */
+  async list(query = {}) {
     const data = await this.Model
-      .find()
+      .find({ ...query })
       .lean();
 
     return map(sanitizeResponse, data);
