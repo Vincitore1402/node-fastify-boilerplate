@@ -1,5 +1,6 @@
 const fastify = require('fastify');
 const bearerAuthPlugin = require('fastify-bearer-auth');
+const qs = require('qs');
 
 const registerRoutes = require('./routes');
 const { connect: connectDB } = require('./db');
@@ -8,8 +9,13 @@ const config = require('./config');
 
 connectDB();
 
-const app = fastify({
+const appParams = {
   logger: true,
+  querystringParser: (str) => qs.parse(str),
+};
+
+const app = fastify({
+  ...appParams,
 });
 
 app.register(bearerAuthPlugin, {
