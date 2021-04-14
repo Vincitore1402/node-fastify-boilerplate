@@ -28,4 +28,7 @@ registerRoutes(app);
 app.setErrorHandler(errorHandler);
 
 app
-  .listen(config.port);
+  .listen(
+    config.port,
+    config.host,
+  );
