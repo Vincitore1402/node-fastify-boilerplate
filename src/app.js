@@ -1,10 +1,9 @@
 const fastify = require('fastify');
-const bearerAuthPlugin = require('fastify-bearer-auth');
 const qs = require('qs');
 
 const registerRoutes = require('./routes');
 const { connect: connectDB } = require('./db');
-const { errorHandler } = require('./middlewares');
+const { errorHandler, registerMiddlewares } = require('./middlewares');
 const config = require('./config');
 
 connectDB();
@@ -18,10 +17,7 @@ const app = fastify({
   ...appParams,
 });
 
-app.register(bearerAuthPlugin, {
-  addHook: false,
-  keys: [config.auth.bearer_token],
-});
+registerMiddlewares(app);
 
 registerRoutes(app);
 
