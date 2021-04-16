@@ -21,6 +21,8 @@ const connect = async (params = {}) => {
     log.info('Mongoose connection has been set up successfully');
   } catch (error) {
     log.error(error, 'Mongoose failed to connect with error:');
+
+    process.exit(1);
   }
 };
 
