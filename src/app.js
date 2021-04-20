@@ -7,26 +7,28 @@ const { errorHandler, registerMiddlewares } = require('./middlewares');
 const config = require('./config');
 const log = require('./utils/logger.shared');
 
-connectDB();
-
 const appParams = {
   logger: true,
   querystringParser: (str) => qs.parse(str),
 };
 
-const app = fastify({
-  ...appParams,
-});
+(async () => {
+  await connectDB();
 
-registerMiddlewares(app);
+  const app = fastify({
+    ...appParams,
+  });
 
-registerRoutes(app);
+  await app.setErrorHandler(errorHandler);
 
-app.setErrorHandler(errorHandler);
+  await registerMiddlewares(app);
 
-app
-  .listen(config.port, config.host)
-  .catch((err) => {
+  await registerRoutes(app);
+
+  try {
+    await app.listen(config.port, config.host);
+  } catch (err) {
     log.error(err, 'Error occurred while starting the application:');
     process.exit(1);
-  });
+  }
+})();

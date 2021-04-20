@@ -11,6 +11,15 @@ module.exports = (err, request, reply) => {
     );
   }
 
+  if (err.statusCode === 429) {
+    return failure(
+      reply,
+      'Too Many Requests',
+      err.message,
+      429,
+    );
+  }
+
   return failure(
     reply,
     'Unexpected error',
