@@ -16,10 +16,15 @@ class UniversitiesService {
    * Returns a list of universities which match the provided query
    *
    * @param query
+   * @param selectQuery
    */
-  async list(query = {}) {
+  async list(
+    query = {},
+    selectQuery = null,
+  ) {
     const data = await this.Model
       .find({ ...query })
+      .select(selectQuery)
       .lean();
 
     return map(sanitizeResponse, data);

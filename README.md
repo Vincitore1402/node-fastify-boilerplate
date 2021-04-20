@@ -60,6 +60,8 @@ GET: /api/v1/universities
 Example: /api/v1/universities?country=Ukraine
 
 Advanced quering example: /api/v1/universities?subjects[elemMatch][in]=OOP&subjects[elemMatch][in]=Data Science
+
+...and using sparse fieldsets: /api/v1/universities?select=city,country
 ```
 
 

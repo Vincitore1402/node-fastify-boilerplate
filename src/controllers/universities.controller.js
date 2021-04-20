@@ -8,9 +8,12 @@ const universitiesService = createUniversitiesService({
 });
 
 const find = async (request, reply) => {
-  const { query } = parseQuery(request.query);
+  const { query, selectQuery } = parseQuery(request.query);
 
-  const data = await universitiesService.list(query);
+  const data = await universitiesService.list(
+    query,
+    selectQuery,
+  );
 
   return success(reply, data);
 };
