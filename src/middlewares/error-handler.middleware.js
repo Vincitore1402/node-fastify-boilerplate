@@ -1,3 +1,5 @@
+const { size } = require('lodash/fp');
+
 const { failure } = require('../utils/reply.utils');
 const { ServiceError } = require('../utils/errors');
 
@@ -8,6 +10,17 @@ module.exports = (err, request, reply) => {
       err.title,
       err.detail,
       err.statusCode,
+    );
+  }
+
+  if (
+    size(err.validation)
+  ) {
+    return failure(
+      reply,
+      'Unprocessable Entity',
+      err.message || 'Validation error',
+      422,
     );
   }
 

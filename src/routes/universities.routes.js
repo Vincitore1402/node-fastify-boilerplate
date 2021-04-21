@@ -1,4 +1,5 @@
 const { universitiesController } = require('../controllers');
+const { Schemas } = require('./schemas');
 
 const SERVICE_NAME = '/universities';
 
@@ -25,6 +26,11 @@ module.exports = async (app) => {
     SERVICE_NAME,
     {
       preHandler: [...getAuth(app)],
+      schema: {
+        body: {
+          $ref: Schemas.UniversityCreateSchemaId,
+        },
+      },
     },
     universitiesController.create,
   );
@@ -33,6 +39,11 @@ module.exports = async (app) => {
     `${SERVICE_NAME}/:id`,
     {
       preHandler: [...getAuth(app)],
+      schema: {
+        body: {
+          $ref: Schemas.UniversityPatchSchemaId,
+        },
+      },
     },
     universitiesController.update,
   );

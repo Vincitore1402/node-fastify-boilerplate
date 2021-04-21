@@ -1,9 +1,12 @@
 const fastify = require('fastify');
 const qs = require('qs');
 
-const registerRoutes = require('./routes');
+const { registerRoutes } = require('./routes');
 const { connect: connectDB } = require('./db');
-const { errorHandler, registerMiddlewares } = require('./middlewares');
+const {
+  errorHandler,
+  registerMiddlewares,
+} = require('./middlewares');
 const config = require('./config');
 const log = require('./utils/logger.shared');
 
@@ -13,19 +16,19 @@ const appParams = {
 };
 
 (async () => {
-  await connectDB();
-
-  const app = fastify({
-    ...appParams,
-  });
-
-  await app.setErrorHandler(errorHandler);
-
-  await registerMiddlewares(app);
-
-  await registerRoutes(app);
-
   try {
+    await connectDB();
+
+    const app = fastify({
+      ...appParams,
+    });
+
+    await app.setErrorHandler(errorHandler);
+
+    await registerMiddlewares(app);
+
+    await registerRoutes(app);
+
     await app.listen(config.port, config.host);
   } catch (err) {
     log.error(err, 'Error occurred while starting the application:');
