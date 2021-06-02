@@ -1,4 +1,4 @@
-# Universities Service
+# Node.js & Fastify boilerplate (Universities Service)
 
 ## Description
 The micro-service sample for managing universities using REST API.
